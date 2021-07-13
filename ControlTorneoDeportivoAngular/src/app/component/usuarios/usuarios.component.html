@@ -1,0 +1,105 @@
+<button type="button" class="btn btn-secondary btn-lg" routerLink="/principal" routerLinkActive='active'>Regresar</button>
+
+<button data-bs-toggle="modal" data-bs-target="#Admin">Agregar Admin</button>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Usuario</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Rol</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of usuarios">
+      <th scope="row">{{ user._id }}</th>
+      <td>{{ user.usuario }}</td>
+      <td>{{ user.name }}</td>
+      <td>{{ user.rol }}</td>
+        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+          <button type="button" class="btn btn-danger" (click)="userID(user._id)"
+          data-bs-toggle="modal" data-bs-target="#delete">Eliminar</button>
+          <button type="button" class="btn btn-warning" (click)="userID(user._id)"
+          data-bs-toggle="modal" data-bs-target="#edit">Editar</button>
+          <button type="button" class="btn btn-success"
+          data-bs-toggle="modal" data-bs-target="#User">Ver datos</button>
+        </div>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Editar Usuario -->
+<div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="inputUser" class="form-label">User</label>
+          <input type="user" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="usuario" #usuario="ngModel" [(ngModel)]="user.usuario">
+        </div>
+        <div class="mb-3">
+          <label for="inputName" class="form-label">Nombre</label>
+          <input type="user" class="form-control" id="inputName" aria-describedby="emailHelp" name="name" #name="ngModel" [(ngModel)]="user.name">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="editUser()">Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Eliminar -->
+<div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Eliminar torneo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Estás seguro de eliminar al usuario, {{user.usuario}}?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" (click)="deleteUser(user._id)">Sí, eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Admin -->
+<div class="modal fade" id="Admin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Crear Administrador</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="inputUser" class="form-label">User</label>
+          <input type="user" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="usuario" #usuario="ngModel" [(ngModel)]="user.usuario">
+        </div>
+        <div class="mb-3">
+          <label for="inputName" class="form-label">Nombre</label>
+          <input type="user" class="form-control" id="inputName" aria-describedby="emailHelp" name="name" #name="ngModel" [(ngModel)]="user.name">
+        </div>
+        <div class="mb-3">
+          <label for="inputPassword" class="form-label">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" name="password" #password="ngModel" [(ngModel)]="user.password">
+          <div id="text" class="form-text">No compartas tus credenciales con nadie.</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="createadmin()">Crear nuevo Administrador</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,103 @@
+<button type="button" class="btn btn-secondary btn-lg" routerLink="/teams" routerLinkActive='active'>Regresar</button>
+<button type="button" class="btn btn-secondary btn-lg" routerLinkActive='active'
+data-bs-toggle="modal" data-bs-target="#crear">Crear Partido</button>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Equipo 1</th>
+      <th scope="col">Goles 1</th>
+      <th scope="col">Equipo 2</th>
+      <th scope="col">Goles 2</th>
+      <th scope="col">Jugado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let match of partido">
+      <th scope="row">{{ match._id }}</th>
+      <td>{{ match.equipo1 }}</td>
+      <td>{{ match.goles1 }}</td>
+      <td>{{ match.equipo2 }}</td>
+      <td>{{ match.goles2 }}</td>
+      <td>{{ match.jugado }}</td>
+        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+          <button type="button" class="btn btn-danger" (click)="getpartido(match._id)"
+          data-bs-toggle="modal" data-bs-target="#delete">Eliminar</button>
+          <button type="button" class="btn btn-warning" (click)="getpartido(match._id)"
+          data-bs-toggle="modal" data-bs-target="#edit">Editar</button>
+        </div>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Editar -->
+<div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Torneo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="inputUser" class="form-label">Goles equipo 1</label>
+          <input type="user" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="goles1" #goles1="ngModel" [(ngModel)]="match.goles1">
+        </div>
+        <div class="mb-3">
+          <label for="inputUser" class="form-label">Goles equipo 2</label>
+          <input type="user" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="goles2" #goles2="ngModel" [(ngModel)]="match.goles2">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="editmatch()">Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Eliminar -->
+<div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Eliminar torneo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Estás seguro de eliminar el partido, {{match._id}}?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" (click)="deletematch(match._id)">Sí, eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Crear -->
+<div class="modal fade" id="crear" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Crear Torneo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="inputUser" class="form-label">Equipo 1</label>
+          <input type="user" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="equipo1" #equipo1="ngModel" [(ngModel)]="match.equipo1">
+        </div>
+        <div class="mb-3">
+          <label for="inputUser" class="form-label">Equipo 2</label>
+          <input type="user" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="equipo2" #equipo2="ngModel" [(ngModel)]="match.equipo2">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="newmatch()">Crear Partido</button>
+      </div>
+    </div>
+  </div>
+</div>

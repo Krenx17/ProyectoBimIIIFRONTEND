@@ -1,0 +1,100 @@
+<button type="button" class="btn btn-secondary btn-lg" routerLink="/tournaments" routerLinkActive='active'>Regresar</button>
+<button type="button" class="btn btn-secondary btn-lg" routerLinkActive='active'
+data-bs-toggle="modal" data-bs-target="#crear">Crear Equipo</button>
+<button type="button" class="btn btn-secondary btn-lg" routerLink="/match" routerLinkActive='active'>Partidos</button>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Torneo</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Puntos</th>
+      <th scope="col">Goles a favor</th>
+      <th scope="col">Goles en contra</th>
+      <th scope="col">Diferencia de goles</th>
+      <th scope="col">Partidos jugados</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let team of equipo">
+      <th scope="row">{{ team._id }}</th>
+      <td>{{ team.torneo }}</td>
+      <td>{{ team.nombre }}</td>
+      <td>{{ team.puntos }}</td>
+      <td>{{ team.golesfavor }}</td>
+      <td>{{ team.golescontra }}</td>
+      <td>{{ team.diferenciagoles }}</td>
+      <td>{{ team.partidosjugados }}</td>
+        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+          <button type="button" class="btn btn-danger" (click)="getequipo(team._id)"
+          data-bs-toggle="modal" data-bs-target="#delete">Eliminar</button>
+          <button type="button" class="btn btn-warning" (click)="getequipo(team._id)"
+          data-bs-toggle="modal" data-bs-target="#edit">Editar</button>
+        </div>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Editar -->
+<div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Equipo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="inputUser" class="form-label">Nombre</label>
+          <input type="user" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="nombre" #nombre="ngModel" [(ngModel)]="team.nombre">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="editteam()">Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Eliminar -->
+<div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Eliminar Equipo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Estás seguro de eliminar el equipo, {{ team.nombre }}?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" (click)="deleteteam(team._id)">Sí, eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Crear -->
+<div class="modal fade" id="crear" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Crear Equipo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="inputUser" class="form-label">Nombre del equipo</label>
+          <input type="user" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="nombre" #nombre="ngModel" [(ngModel)]="team.nombre">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="newteam()">Crear Torneo</button>
+      </div>
+    </div>
+  </div>
+</div>
